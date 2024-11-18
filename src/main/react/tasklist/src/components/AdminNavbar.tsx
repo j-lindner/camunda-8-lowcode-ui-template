@@ -20,7 +20,7 @@ function AdminNavbar() {
   const { t } = useTranslation();
   const user = useSelector((state: any) => state.auth.data)
   const form = useSelector((state: any) => state.adminForms.currentForm)
-  const formEditor = useSelector((state: any) => state.adminForms.formEditor)
+  //const formEditor = useSelector((state: any) => state.adminForms.formEditor)
   const mail = useSelector((state: any) => state.adminMails.currentMail)
   const theme = useSelector((state: any) => state.adminThemes.currentTheme)
   const language = useSelector((state: any) => state.translations.currentLanguage)
@@ -116,7 +116,7 @@ function AdminNavbar() {
           </div>
           : <></>}
       </nav>
-      {form && formEditor ?
+      {form && adminFormService.getFormEditor() ?
         <Modal show={showPreview} onHide={handleClose} animation={false} fullscreen>
           <Modal.Header closeButton>
             <Modal.Title>{t("Preview form")}</Modal.Title>
@@ -124,7 +124,7 @@ function AdminNavbar() {
           <Modal.Body>
             <div className="row">
               <div className="card col"><DataPreviewEditor /></div>
-              <div className="card col"><FormPreview id="form-preview" formKey={null} schema={formEditor.getSchema()} variables={[]} disabled={false} /></div>
+              <div className="card col"><FormPreview /></div>
             </div>
           </Modal.Body>
           <Modal.Footer>

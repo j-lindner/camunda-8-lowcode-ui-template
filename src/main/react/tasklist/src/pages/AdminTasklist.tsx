@@ -125,7 +125,7 @@ function AdminTasklist() {
     if (!clone.instancesColumns) {
       clone.instancesColumns = [];
     }
-    clone.instancesColumns.push({ "label": "Column header", "value": "id", "type": "number" });
+    clone.instancesColumns.push({ "label": "Column header", "value": "key", "type": "number" });
     dispatch(taskService.saveTasklistConf(clone));
   }
   const changeInstancesColumn = (index: number, attribute: string, value: any) => {

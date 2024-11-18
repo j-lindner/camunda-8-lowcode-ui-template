@@ -47,14 +47,22 @@ public class FormsController extends AbstractController {
       @PathVariable String locale)
       throws TaskListException, IOException, NumberFormatException, OperateException {
 
-    Form form = formService.findByName(formKey);
-    JsonNode schema = form.getSchema();
-    ObjectNode schemaModif = (ObjectNode) schema;
-    schemaModif.put("generator", "formJs");
-    if (form.getGenerator() != null) {
-      schemaModif.put("generator", form.getGenerator());
+    JsonNode schema = null;
+    try {
+      String schemaStr = tasklistService.getForm(processDefinitionId, formKey);
+      schema = JsonUtils.toJsonNode(schemaStr);
+      ObjectNode schemaModif = (ObjectNode) schema;
+      schemaModif.put("generator", "formJs");
+    } catch (TaskListException e) {
+      Form form = formService.findByName(formKey);
+      schema = form.getSchema();
+      ObjectNode schemaModif = (ObjectNode) schema;
+      schemaModif.put("generator", "formJs");
+      if (form.getGenerator() != null) {
+        schemaModif.put("generator", form.getGenerator());
+      }
     }
-    if (locale != null) {
+    if (schema!=null && locale != null) {
       internationalizationService.translateFormSchema(schema, locale);
     }
     return schema;

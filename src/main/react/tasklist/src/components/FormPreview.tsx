@@ -2,30 +2,26 @@ import React, { useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import type { } from 'redux-thunk/extend-redux';
 import adminFormService from '../service/AdminFormService';
-import { Form as ExtendedForm} from '@camunda-community/form-js-viewer';
-import { Form } from '@bpmn-io/form-js-viewer';
+import { newForm } from '@camunda-community/form-js-extended';
 import { IFormViewer } from '../store/model';
 
-function FormPreview(formViewer: IFormViewer) {
+function FormPreview() {
   const previewData = useSelector((state: any) => state.adminForms.previewData)
-
+  const schema = adminFormService.getSchema();
   const form = adminFormService.getCurrentForm();
   useEffect(() => {
     const container = document.querySelector('#task-form-preview');
     try {
       let variables = JSON.parse(previewData);
-       if (container && formViewer.schema) {
+       if (container && schema) {
          container.innerHTML = '';
 
          let bpmnForm = null;
-         console.log(formViewer);
-         if (form.generator == 'extendedFormJs') {
-           bpmnForm = new ExtendedForm({ container: container });
-         } else {
-           bpmnForm = new Form({ container: container });
-         }
+         //console.log(formViewer);
+         
+         bpmnForm = newForm({ container: container });
 
-         bpmnForm.importSchema(formViewer.schema, variables).then(
+         bpmnForm.importSchema(schema, variables).then(
            function (data: any) {
                console.log(data);
            });

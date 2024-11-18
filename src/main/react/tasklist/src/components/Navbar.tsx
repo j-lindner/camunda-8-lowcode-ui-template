@@ -29,7 +29,7 @@ function Navbar() {
         </div>
       </div>
       <div className="bg-primary menu">
-        {tasklistConf.displayIntancesPage ?
+        {tasklistConf && tasklistConf.displayIntancesPage ?
           <NavLink to="/tasklist/instances" className={({ isActive }) =>
             isActive ? "text-light menu-item selected" : "text-light menu-item"
           } >{t("Instances page")}</NavLink>

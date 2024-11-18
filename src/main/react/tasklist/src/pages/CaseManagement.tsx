@@ -51,7 +51,6 @@ function CaseManagement() {
         return conf;
       }
     }
-    console.log(elementIds);
     let clone = Object.assign({}, caseMgmtConf);
    let conf = {
       "id": elt.id,
@@ -85,6 +84,7 @@ function CaseManagement() {
       viewer.importXML(xml).then((result: any) => {
         const eltRegistry: any = viewer!.get('elementRegistry');
         eltRegistry.forEach((elt: any) => {
+
           if (elt.type == "bpmn:BoundaryEvent" && elt.businessObject.eventDefinitions && elt.businessObject.eventDefinitions[0].$type == "bpmn:MessageEventDefinition") {
             let hosts = [elt.host.id];
             if (elt.host.type == "bpmn:SubProcess") {
@@ -107,7 +107,8 @@ function CaseManagement() {
           }
 
           if (elt.type == "bpmn:StartEvent" &&
-            elt.businessObject.eventDefinitions && elt.businessObject.eventDefinitions[0].$type == "bpmn:MessageEventDefinition" &&
+            elt.businessObject.eventDefinitions && elt.businessObject.eventDefinitions.length > 0 &&
+            elt.businessObject.eventDefinitions[0].$type == "bpmn:MessageEventDefinition" &&
             elt.businessObject.$parent.$type == "bpmn:SubProcess") {
             let conf = addMessageConfIfRequired(elt, null);
             if (conf.enabled) {

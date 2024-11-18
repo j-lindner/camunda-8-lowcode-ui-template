@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { } from 'redux-thunk/extend-redux';
 import taskService from '../service/TaskService';
 import processService from '../service/ProcessService';
-import { Form } from '@bpmn-io/form-js-viewer';
+import { newForm } from '@camunda-community/form-js-extended';
 import { IFormViewer } from '../store/model';
 import {Alert } from 'react-bootstrap';
 
@@ -16,7 +16,7 @@ function FormJsViewer(formViewer: IFormViewer) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let errors: string[] = [];
-  const [bpmnForm, setBpmnForm] = useState<Form | null>(null);
+  const [bpmnForm, setBpmnForm] = useState<any | null>(null);
   const docs = useSelector((state: any) => state.documents.docs)
   const missingDocs = useSelector((state: any) => state.documents.missingDocs)
 
@@ -25,7 +25,7 @@ function FormJsViewer(formViewer: IFormViewer) {
     if (container && formViewer.schema) {
       container.innerHTML = '';
 
-      let bpmnForm = new Form({ container: container });
+      let bpmnForm = newForm({ container: container });
       if (formViewer.disabled) {
         bpmnForm.setProperty('readOnly', true);
       }

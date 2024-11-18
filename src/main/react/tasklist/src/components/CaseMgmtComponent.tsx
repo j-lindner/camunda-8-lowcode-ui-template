@@ -8,8 +8,7 @@ import taskService from '../service/TaskService';
 import FormResolver from '../components/FormResolver';
 import api from '../service/api';
 import { OverlayTrigger, Tooltip, Button, Dropdown, Modal, Alert } from 'react-bootstrap';
-import { Form } from '@bpmn-io/form-js-viewer';
-import { Form as CommForm} from '@camunda-community/form-js-viewer';
+import { newForm } from '@camunda-community/form-js-extended';
 import { Formio } from 'formiojs';
 
 import { useTranslation } from "react-i18next";
@@ -114,28 +113,16 @@ function CaseMgmtComponent(props: CaseMgmtViewer) {
 
   useEffect(() => {
     if (showMessageConf && showMessageConf.schema) {
-      console.log('ptouy');
       const container = document.getElementById("message-form");
-      console.log(container);
       if (container) {
         container.innerHTML = '';
         if (showMessageConf.schema.generator == 'formIo') {
           buildFormIo(container);
         }
-        else if (showMessageConf.schema.generator == 'extendedFormJs') {
-          let bpmnForm = new CommForm({ container: container });
-          console.log(JSON.parse(JSON.stringify(showMessageConf.schema)));
-          bpmnForm.importSchema(showMessageConf.schema, props.variables).then(
-            function (result: any) {
-              console.log(result);
-            });
-          setBpmnForm(bpmnForm);
-        }
         else {
-          let bpmnForm = new Form({ container: container });
+          let bpmnForm = newForm({ container: container });
           bpmnForm.importSchema(showMessageConf.schema, props.variables).then(
             function (result: any) {
-              console.log(result);
             });
           setBpmnForm(bpmnForm);
         }

@@ -30,16 +30,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskListService {
 
-  @Value("${zeebe.client.cloud.clientId:notProvided}")
+  @Value("${camunda.client.auth.client-id:notProvided}")
   private String clientId;
 
-  @Value("${zeebe.client.cloud.clientSecret:notProvided}")
+  @Value("${camunda.client.auth.client-secret:notProvided}")
   private String clientSecret;
 
-  @Value("${zeebe.client.cloud.clusterId:notProvided}")
+  @Value("${camunda.client.cluster-id:notProvided}")
   private String clusterId;
 
-  @Value("${zeebe.client.cloud.region:notProvided}")
+  @Value("${camunda.client.region:notProvided}")
   private String region;
 
   @Value("${identity.clientId:notProvided}")
@@ -124,8 +124,8 @@ public class TaskListService {
     tasklistSearch.setCandidateGroup(taskSearch.getGroup());
     pagination.setSort(
         List.of(
-            new TaskOrderBy().field(FieldEnum.DUEDATE).order(OrderEnum.ASC),
-            new TaskOrderBy().field(FieldEnum.CREATIONTIME).order(OrderEnum.ASC)));
+            new TaskOrderBy().field(FieldEnum.DUE_DATE).order(OrderEnum.ASC),
+            new TaskOrderBy().field(FieldEnum.CREATION_TIME).order(OrderEnum.ASC)));
     tasklistSearch.setPagination(pagination);
     if (fetchVariables != null) {
       for (String var : fetchVariables) {

@@ -1,12 +1,14 @@
 # https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-platform-8-saas-connection
 # https://github.com/camunda-community-hub/spring-zeebe#additional-configuration-options
 
-zeebe.client:
-  cloud:
+camunda:
+  client:
+    mode: saas
+    auth:
+      client-id: XXX
+      client-secret: XXX
+    cluster-id: XXX
     region: bru-2
-    clusterId: XXX
-    clientId: XXX
-    clientSecret: XXX
               
 # go to http://localhost:8084/applications/ and create application of type M2M with read/write access to Operate & Tasklist
 identity.clientId: pouet

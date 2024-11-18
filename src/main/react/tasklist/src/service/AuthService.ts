@@ -37,7 +37,7 @@ export class AuthService {
     catch (error: any) {
       if (error.response) {
         // The request was made. server responded out of range of 2xx
-        dispatch(fail(error.response.data.message));
+        dispatch(fail(error.message));
       } else if (error.request) {
         // The request was made but no response was received
         dispatch(fail('ERROR_NETWORK'));

@@ -1,35 +1,64 @@
 {
-  "name" : "camunda-process",
-  "modified" : 1699256955907,
+  "name" : "ExampleApiSelect",
+  "modified" : 1731926307676,
   "schema" : {
-  "components": [
-    {
-      "text": "## Camunda Process Start Form",
-      "label": "Text view",
-      "type": "text",
-      "layout": {
-        "row": "Row_0camqrv",
-        "columns": null
+    "components" : [ {
+      "text" : "# Example of Form-js extension",
+      "type" : "text",
+      "layout" : {
+        "row" : "Row_0gadl73",
+        "columns" : null
       },
-      "id": "Field_1efmog4"
+      "id" : "Field_0qyjbn5"
+    }, {
+      "label" : "Country",
+      "values" : [ {
+        "value" : "dk",
+        "label" : "Denmark"
+      }, {
+        "value" : "fr",
+        "label" : "France"
+      }, {
+        "value" : "de",
+        "label" : "Germany"
+      }, {
+        "value" : "es",
+        "label" : "Spain"
+      } ],
+      "type" : "apiSelectField",
+      "layout" : {
+        "row" : "Row_1qznxcu",
+        "columns" : null
+      },
+      "id" : "Field_0q7h76t",
+      "key" : "country",
+      "apiSelect" : {
+        "optionsSrc" : "/api/simul/countries"
+      }
+    }, {
+      "label" : "Cities",
+      "values" : [ ],
+      "type" : "apiSelectField",
+      "layout" : {
+        "row" : "Row_00xsuqe",
+        "columns" : null
+      },
+      "id" : "Field_19joqs1",
+      "key" : "city",
+      "apiSelect" : {
+        "optionsSrc" : "=\"/api/simul/\"+country+\"/cities\""
+      }
+    } ],
+    "schemaVersion" : 17,
+    "type" : "default",
+    "id" : "Form_3213894",
+    "executionPlatform" : "Camunda Cloud",
+    "executionPlatformVersion" : "1.1",
+    "exporter" : {
+      "name" : "Camunda Modeler",
+      "version" : "5.0.0"
     }
-  ],
-  "type": "default",
-  "id": "Form_07gc6mf",
-  "executionPlatform": "Camunda Cloud",
-  "executionPlatformVersion": "8.4.0",
-  "exporter": {
-    "name": "Camunda Modeler",
-    "version": "5.20.0"
   },
-  "schemaVersion": 15
-},
-"previewData" : {
-    "toto" : "pouet",
-    "comments" : [ {
-      "comment" : "a comment",
-      "important" : true
-    } ]
-  },
-  "generator" : "extendedFormJs"
- }
+  "previewData" : { },
+  "generator" : "formJs"
+}

@@ -1,21 +1,27 @@
 {
   "name" : "NewAssigneeForm",
-  "modified" : 1723536211698,
+  "modified" : 1731768535717,
   "schema" : {
     "components" : [ {
-      "values" : [ {
-        "label" : "Value",
-        "value" : "value"
-      } ],
       "label" : "New assignee",
-      "type" : "select",
-      "id" : "Field_1emgx61",
+      "values" : [ {
+        "value" : "demo",
+        "label" : "De Mo"
+      } ],
+      "type" : "apiSelectField",
+      "layout" : {
+        "row" : "Row_1f76f9m",
+        "columns" : null
+      },
+      "id" : "Field_1xc13qi",
       "key" : "assignee",
-      "dataSource" : "http://localhost:8080/api/simul/users"
+      "apiSelect" : {
+        "optionsSrc" : "/api/simul/users"
+      }
     } ],
-    "schemaVersion" : 4,
+    "schemaVersion" : 17,
     "type" : "default",
-    "id" : "Form_2051349",
+    "id" : "Form_8606425",
     "executionPlatform" : "Camunda Cloud",
     "executionPlatformVersion" : "1.1",
     "exporter" : {
@@ -24,5 +30,5 @@
     }
   },
   "previewData" : { },
-  "generator" : "extendedFormJs"
+  "generator" : "formJs"
 }

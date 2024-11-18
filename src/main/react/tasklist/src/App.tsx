@@ -27,7 +27,7 @@ import 'formiojs/dist/formio.full.min.css'
 import './assets/css/community-formjs-expurged.css';
 import '@bpmn-io/form-js/dist/assets/form-js.css';
 import '@bpmn-io/form-js/dist/assets/form-js-editor.css';
-import '@bpmn-io/form-js/dist/assets/dragula.css';
+//import '@bpmn-io/form-js/dist/assets/draggle.css';
 import '@bpmn-io/form-js/dist/assets/properties-panel.css';
 import './assets/css/custom.css';
 import './assets/css/login.css';

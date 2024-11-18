@@ -1,10 +1,9 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../service/api';
 import processService from '../service/ProcessService';
 
-import { Table, ButtonGroup, Row, Col, Modal, InputGroup, Form, Button, Dropdown } from 'react-bootstrap';
+import { Table, Row, Col, Modal, InputGroup, Form, Button } from 'react-bootstrap';
 import moment from "moment";
 
 import { useTranslation } from "react-i18next";
@@ -39,21 +38,23 @@ function Instances() {
 
 
   const loadInstance = async (pagination: any) => {
-    setLoading(true);
+    if (tasklistConf && state) {
+      setLoading(true);
 
-    let paging = "?pageSize=" + pagination.pageSize;
-    if (pagination.page > 0) {
-      if (pagination.after) {
-        paging += "&after=" + pagination.after;
+      let paging = "?pageSize=" + pagination.pageSize;
+      if (pagination.page > 0) {
+        if (pagination.after) {
+          paging += "&after=" + pagination.after;
+        }
       }
+      api.get('/instances/' + tasklistConf.instancesBpmnProcessId + '/' + state + paging).then((response: any) => {
+        setInstances(response.data.items);
+        setResult(response.data);
+        setLoading(false);
+      }).catch((error: any) => {
+        alert(error.message);
+      })
     }
-    api.get('/instances/' + tasklistConf.instancesBpmnProcessId + '/' + state + paging).then((response: any) => {
-      setInstances(response.data.items);
-      setResult(response.data);
-      setLoading(false);
-    }).catch((error:any) => {
-      alert(error.message);
-    })
   }
 
   const before = () => {
@@ -76,7 +77,7 @@ function Instances() {
 
   useEffect(() => {
     loadInstance(pagination);
-  }, [state]);
+  }, [state, tasklistConf]);
 
 
   const display = (instance: any, column: any): string => {

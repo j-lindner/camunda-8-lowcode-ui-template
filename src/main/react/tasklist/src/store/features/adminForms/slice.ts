@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FormEditor } from '@camunda-community/form-js-editor';
 
 interface AdminFormsState {
   forms: string[] | null;
   currentForm: any;
-  formEditor: any;
-  formBuilder: any;
   previewData: string;
   loading: boolean;
   error: string | null;
@@ -14,8 +11,6 @@ interface AdminFormsState {
 const initialState: AdminFormsState = {
   forms: null,
   currentForm: null,
-  formEditor: null,
-  formBuilder: null,
   previewData: '{}',
   loading: false,
   error: null,
@@ -53,14 +48,6 @@ const adminFormsSlice = createSlice({
       state.currentForm.previewData = action.payload;
       state.previewData = action.payload;
     },
-    setCurrentFormEditor: (state: AdminFormsState, action: PayloadAction<any>) => {
-      state.formEditor = action.payload;
-      state.formBuilder = null;
-    },
-    setCurrentFormBuilder: (state: AdminFormsState, action: PayloadAction<any>) => {
-      state.formBuilder = action.payload;
-      state.formEditor = null;
-    },
   },
 });
 
@@ -69,8 +56,6 @@ export const {
   loadSuccess,
   setCurrentForm,
   setFormName,
-  setCurrentFormEditor,
-  setCurrentFormBuilder,
   setCurrentFormPreview,
   fail,
   silentfail

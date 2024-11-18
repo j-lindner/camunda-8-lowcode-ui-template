@@ -1,12 +1,16 @@
 import store, { AppThunk } from '../store';
-import { loadStart, loadSuccess, setCurrentForm, setFormName, setCurrentFormEditor, setCurrentFormBuilder, setCurrentFormPreview, fail, silentfail } from '../store/features/adminForms/slice';
-import { FormEditor as CommunityFormEditor } from '@camunda-community/form-js-editor';
-import { FormEditor } from '@bpmn-io/form-js-editor';
+import { loadStart, loadSuccess, setCurrentForm, setFormName, setCurrentFormPreview, fail, silentfail } from '../store/features/adminForms/slice';
 import { FormBuilder } from 'formiojs';
+import { newFormEditor } from '@camunda-community/form-js-extended';
 import api from './api';
+
+var currentFormEditor: any;
+var currentFormBuilder: any;
 
 export class AdminFormService {
   lastFetch: number = 0;
+  lastFormEditor: any = null;
+  formEditorCreating = false;
   getDefaultForm = (formType: string): any => {
     if (formType == 'formJs' || formType == 'extendedFormJs') {
       return {
@@ -86,20 +90,33 @@ export class AdminFormService {
   setFormName = (formName: string): AppThunk => async dispatch => {
     dispatch(setFormName(formName));
   }
-  setFormEditor = (formEditor: FormEditor | CommunityFormEditor): AppThunk => async dispatch => {
-    dispatch(setCurrentFormEditor(formEditor));
+  setFormEditor = (formEditor: any): AppThunk => async dispatch => {
+    currentFormEditor = formEditor;
+    currentFormBuilder = null;
+  }
+  getFormEditor = () => {
+    return currentFormEditor;
   }
   setFormBuilder = (formBuilder: FormBuilder): AppThunk => async dispatch => {
-    dispatch(setCurrentFormBuilder(formBuilder));
+    currentFormBuilder = formBuilder;
+    currentFormEditor = null;
+  }
+  getFormBuilder = () => {
+    return currentFormBuilder;
+  }
+  getSchema = () => {
+    if (currentFormEditor/*store.getState().adminForms.formEditor*/) {
+     return currentFormEditor.saveSchema();// store.getState().adminForms.formEditor.saveSchema();
+    } else {
+      return currentFormBuilder._form; //store.getState().adminForms.formBuilder._form;
+    }
   }
   saveCurrentForm = () => {
     let form = JSON.parse(JSON.stringify(store.getState().adminForms.currentForm));
-    if (store.getState().adminForms.formEditor) {
-      form.schema = store.getState().adminForms.formEditor.getSchema();
+    if (currentFormEditor) {
+      form.schema = currentFormEditor.saveSchema();
     } else {
-      console.log(store.getState().adminForms.formBuilder);
-      console.log(store.getState().adminForms.formBuilder._form);
-      form.schema = store.getState().adminForms.formBuilder._form;
+      form.schema = currentFormBuilder._form; 
     }
     form.previewData = JSON.parse(form.previewData);
     api.post('/edition/forms', form).then(response => {
@@ -107,13 +124,37 @@ export class AdminFormService {
     }).catch(error => {
       alert(error.message);
     })
-    //this.$store.form.previewData = JSON.stringify(this.$store.form.previewData, null, 2);
   }
   setFormPreview = (data: string): AppThunk => async dispatch => {
     dispatch(setCurrentFormPreview(data));
   }
   getCurrentForm = (): any => {
     return store.getState().adminForms.currentForm;
+  }
+
+  buildEditor = (div: any, form:any): AppThunk => async dispatch => {
+    if (!this.formEditorCreating) {
+      this.formEditorCreating = true;
+   
+    if (this.lastFormEditor) {
+      this.lastFormEditor.destroy();
+    }
+      
+      let div = document.querySelector('#form-editor');
+    
+      if (form.generator == 'formJs') {
+        this.lastFormEditor = newFormEditor({
+          container: div
+        });
+        this.lastFormEditor.importSchema(form.schema);
+        dispatch(adminFormService.setFormEditor(this.lastFormEditor));
+      } else {
+        const formBuilder = new FormBuilder(div, JSON.parse(JSON.stringify(form.schema)), { noDefaultSubmitButton: true });
+        dispatch(adminFormService.setFormBuilder(formBuilder));
+      }
+
+      this.formEditorCreating = false;
+    }
   }
 }
 
