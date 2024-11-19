@@ -9,6 +9,8 @@ import io.camunda.zeebe.client.ZeebeClient;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import org.camunda.feel.syntaxtree.ValString;
 import org.example.camunda.process.solution.facade.dto.casemgmt.CaseManagementConfiguration;
 import org.example.camunda.process.solution.facade.dto.casemgmt.MessageConf;
 import org.example.camunda.process.solution.jsonmodel.Form;
@@ -117,7 +119,7 @@ public class CaseManagementController {
     Map<String, Object> instanceVariables = operateService.getVariablesAsMap(processInstanceKey);
     try {
       String correlationKey =
-          (String) FeelUtils.evaluate(conf.getCorrelationKey().substring(1), instanceVariables);
+              ((ValString) FeelUtils.evaluate(conf.getCorrelationKey().substring(1), instanceVariables)).value();
       zeebeClient
           .newPublishMessageCommand()
           .messageName(message)
