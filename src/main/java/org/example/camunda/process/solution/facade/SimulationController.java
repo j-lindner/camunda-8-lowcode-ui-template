@@ -33,6 +33,7 @@ public class SimulationController {
         new FormJsListValue("dk", "Denmark"),
         new FormJsListValue("fr", "France"),
         new FormJsListValue("de", "Germany"),
+        new FormJsListValue("us", "U.S.A"),
         new FormJsListValue("es", "Spain"));
   }
 
@@ -63,6 +64,9 @@ public class SimulationController {
               new FormJsListValue("Barcelone", "Barcelone"),
               new FormJsListValue("Valencia", "Valencia"),
               new FormJsListValue("Oviedo", "Oviedo"));
+      case "us" ->
+          List.of(
+              new FormJsListValue("NewYork", "NewYork"), new FormJsListValue("Detroit", "Detroit"));
 
       default -> List.of(new FormJsListValue("Coruscant", "Coruscant"));
     };

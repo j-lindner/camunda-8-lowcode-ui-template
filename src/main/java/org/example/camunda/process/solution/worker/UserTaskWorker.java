@@ -32,7 +32,8 @@ public class UserTaskWorker {
   @JobWorker(
       type = "io.camunda.zeebe:userTask",
       autoComplete = false,
-      timeout = 2592000000L) // set timeout to 30 days
+      timeout = 2592000000L, // set timeout to 30 days
+      streamEnabled = false)
   public void listenUserTask(
       final JobClient client,
       final ActivatedJob job,

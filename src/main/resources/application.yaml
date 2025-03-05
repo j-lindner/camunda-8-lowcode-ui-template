@@ -5,17 +5,11 @@ camunda:
   client:
     mode: saas
     auth:
-      client-id: XXX
-      client-secret: XXX
-    cluster-id: XXX
-    region: bru-2
-              
-# go to http://localhost:8084/applications/ and create application of type M2M with read/write access to Operate & Tasklist
-identity.clientId: pouet
-identity.clientSecret: CSf4Jqwcmw6HsEocpslOvVPjZ4t8DUoP
-keycloakUrl: http://localhost:18080
-tasklistUrl: http://localhost:8082/
-operateUrl: http://localhost:8081/
+      client-id: _xVJDiJelXOsffnEwWYwKrlUQLS0ffOA
+      client-secret: ib2djoTf3XKu.5scgqwij4nW61fZZUjyku_F~mdhUhW2EB~_N6s-kYXu.i2zZIcM
+    cluster-id: 223154c3-0313-4da4-a9a6-801e22e38ffc
+    region: fra-1
+
 
 # this is to allow react application launched separately to access the WS
 websocket:

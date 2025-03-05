@@ -23,7 +23,7 @@ public class AssigneeWorker {
 
   @Autowired private OrganizationService organizationService;
 
-  @JobWorker(type = "selectAssignee")
+  @JobWorker(type = "selectAssignee", streamEnabled = false)
   public ProcessVariables selectAssignee(@VariablesAsType ProcessVariables variables) {
     LOG.info("Invoking myService with variables: " + variables);
 
@@ -33,7 +33,7 @@ public class AssigneeWorker {
     return new ProcessVariables().setAssignee1(usersList.get(idx).getUsername());
   }
 
-  @JobWorker
+  @JobWorker(streamEnabled = false)
   public Map<String, Long> failTask(JobClient client, ActivatedJob job) {
     try {
       return Map.of("result", 3L / 0L);
@@ -43,7 +43,7 @@ public class AssigneeWorker {
     }
   }
 
-  @JobWorker
+  @JobWorker(streamEnabled = false)
   public void mock() {
     LOG.info("mock");
   }
