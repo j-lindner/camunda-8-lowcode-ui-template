@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { } from 'redux-thunk/extend-redux';
 import taskService from '../service/TaskService';
 import processService from '../service/ProcessService';
-import { newForm } from '@camunda-community/form-js-extended';
+import { newForm } from '@camunda-community/form-js-extended-jens';
 import { IFormViewer } from '../store/model';
 import {Alert } from 'react-bootstrap';
 

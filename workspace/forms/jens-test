@@ -1,0 +1,45 @@
+{
+  "name" : "jens-test",
+  "modified" : 1741350420588,
+  "schema" : {
+    "components" : [ {
+      "label" : "Number",
+      "type" : "number",
+      "layout" : {
+        "row" : "Row_1otl737",
+        "columns" : null
+      },
+      "id" : "Field_09bmel0",
+      "key" : "number_ajs37d"
+    }, {
+      "label" : "File picker",
+      "type" : "filepicker",
+      "layout" : {
+        "row" : "Row_0imrad6",
+        "columns" : null
+      },
+      "id" : "Field_1qevhg7",
+      "key" : "filepicker_b4sdew"
+    }, {
+      "computeOn" : "change",
+      "type" : "expression",
+      "layout" : {
+        "row" : "Row_0u1f804",
+        "columns" : null
+      },
+      "id" : "Field_0254en0",
+      "key" : "expression_a31v3g"
+    } ],
+    "schemaVersion" : 17,
+    "type" : "default",
+    "id" : "Form_8880857",
+    "executionPlatform" : "Camunda Cloud",
+    "executionPlatformVersion" : "1.1",
+    "exporter" : {
+      "name" : "Camunda Modeler",
+      "version" : "5.0.0"
+    }
+  },
+  "previewData" : { },
+  "generator" : "formJs"
+}

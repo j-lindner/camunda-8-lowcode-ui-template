@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import type { } from 'redux-thunk/extend-redux';
 import adminFormService from '../service/AdminFormService';
-import { newForm } from '@camunda-community/form-js-extended';
+import { newForm } from '@camunda-community/form-js-extended-jens';
 import { IFormViewer } from '../store/model';
 
 function FormPreview() {
@@ -18,7 +18,7 @@ function FormPreview() {
 
          let bpmnForm = null;
          //console.log(formViewer);
-         
+
          bpmnForm = newForm({ container: container });
 
          bpmnForm.importSchema(schema, variables).then(
@@ -35,7 +35,7 @@ function FormPreview() {
 
 
   return ( <div id="task-form-preview"></div>)
-  
+
 }
 
 export default FormPreview;

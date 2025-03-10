@@ -1,4 +1,4 @@
-declare module '@camunda-community/form-js-extended';
+declare module '@camunda-community/form-js-extended-jens';
 declare module 'dmn-js/lib/Modeler';
 declare module 'dmn-js-properties-panel';
 declare module 'camunda-bpmn-js/lib/camunda-cloud/Modeler';

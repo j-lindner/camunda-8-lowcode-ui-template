@@ -4,6 +4,7 @@
 camunda:
   client:
     mode: saas
+    # (invalid)
     auth:
       client-id: _xVJDiJelXOsffnEwWYwKrlUQLS0ffOA
       client-secret: ib2djoTf3XKu.5scgqwij4nW61fZZUjyku_F~mdhUhW2EB~_N6s-kYXu.i2zZIcM

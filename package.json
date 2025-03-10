@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@camunda-community/form-js-extended": "^1.1.10"
+    "@camunda-community/form-js-extended-jens": "^1.1.24"
   }
 }

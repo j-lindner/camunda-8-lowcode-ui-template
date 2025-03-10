@@ -8,7 +8,7 @@ import taskService from '../service/TaskService';
 import FormResolver from '../components/FormResolver';
 import api from '../service/api';
 import { OverlayTrigger, Tooltip, Button, Dropdown, Modal, Alert } from 'react-bootstrap';
-import { newForm } from '@camunda-community/form-js-extended';
+import { newForm } from '@camunda-community/form-js-extended-jens';
 import { Formio } from 'formiojs';
 
 import { useTranslation } from "react-i18next";
@@ -101,7 +101,7 @@ function CaseMgmtComponent(props: CaseMgmtViewer) {
       setShowMessageConf(messageConf);
     }
   }
- 
+
   const buildFormIo = async (container: any) => {
     let formIoForm = await Formio.createForm(container, showMessageConf.schema!);
     formIoForm.submission = {
@@ -146,7 +146,7 @@ function CaseMgmtComponent(props: CaseMgmtViewer) {
               </Dropdown.Menu>
             </Dropdown>
             : <></>}
-          
+
         <Modal show={showMessageConf} onHide={closeMessage} size="lg">
           {showMessageConf ? <>
             <Modal.Header closeButton>

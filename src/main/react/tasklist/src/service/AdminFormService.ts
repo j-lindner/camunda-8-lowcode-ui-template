@@ -1,7 +1,7 @@
 import store, { AppThunk } from '../store';
 import { loadStart, loadSuccess, setCurrentForm, setFormName, setCurrentFormPreview, fail, silentfail } from '../store/features/adminForms/slice';
 import { FormBuilder } from 'formiojs';
-import { newFormEditor } from '@camunda-community/form-js-extended';
+import { newFormEditor } from '@camunda-community/form-js-extended-jens';
 import api from './api';
 
 var currentFormEditor: any;
@@ -43,7 +43,7 @@ export class AdminFormService {
     }
   }
   geForms = (): AppThunk => async dispatch => {
-    if (this.lastFetch < Date.now() - 5000) { 
+    if (this.lastFetch < Date.now() - 5000) {
       try {
         dispatch(loadStart());
         const { data } = await api.get<string[]>('/edition/forms/names');
@@ -116,7 +116,7 @@ export class AdminFormService {
     if (currentFormEditor) {
       form.schema = currentFormEditor.saveSchema();
     } else {
-      form.schema = currentFormBuilder._form; 
+      form.schema = currentFormBuilder._form;
     }
     form.previewData = JSON.parse(form.previewData);
     api.post('/edition/forms', form).then(response => {
@@ -135,13 +135,13 @@ export class AdminFormService {
   buildEditor = (div: any, form:any): AppThunk => async dispatch => {
     if (!this.formEditorCreating) {
       this.formEditorCreating = true;
-   
+
     if (this.lastFormEditor) {
       this.lastFormEditor.destroy();
     }
-      
+
       let div = document.querySelector('#form-editor');
-    
+
       if (form.generator == 'formJs') {
         this.lastFormEditor = newFormEditor({
           container: div

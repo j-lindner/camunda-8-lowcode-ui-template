@@ -39,6 +39,8 @@ public class SimulationController {
 
   @GetMapping("/{countryCode}/cities")
   public List<FormJsListValue> cities(@PathVariable String countryCode) {
+
+      // retrieve from lambda/call lambda
     return switch (countryCode) {
       case "dk" ->
           List.of(
